@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;;
+import com.qualcomm.robotcore.util.Range;
 
 /**
  * Created by colin on 10/25/2016.
@@ -17,7 +17,7 @@ public class RobotHardwareClassThingmabobba
     /* Public OpMode members. */
     public DcMotor leftMotor;
     public DcMotor rightMotor;
-    public DcMotor rightMotor2;
+    public DcMotor mechMotor1;
     public DcMotor centralMotor;
     public CRServo leftClaw;
     /*public Servo rightClaw   = null;
@@ -46,25 +46,25 @@ public class RobotHardwareClassThingmabobba
         // Define and Initialize Motors
         leftMotor   = hwMap.dcMotor.get("left_drive");
         rightMotor  = hwMap.dcMotor.get("right_drive");
-        rightMotor2   = hwMap.dcMotor.get("right_drive2");
+        mechMotor1   = hwMap.dcMotor.get("mech_drive1");
         centralMotor  = hwMap.dcMotor.get("central_drive");
 
         leftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
-        rightMotor2.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
+        mechMotor1.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         centralMotor.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
 
         // Set all motors to zero power
         leftMotor.setPower(0);
         rightMotor.setPower(0);
-        rightMotor2.setPower(0);
+        mechMotor1.setPower(0);
         centralMotor.setPower(0);
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
         leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        mechMotor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         centralMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftClaw = hwMap.crservo.get("left_hand");
         /*rightClaw = hwMap.servo.get("right_hand");

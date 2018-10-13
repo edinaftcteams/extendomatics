@@ -68,7 +68,7 @@ public class ColinOpMode extends LinearOpMode {
         double left;
         double right;
         double central;
-        double right2;
+        double mech1;
         double max;
 
         /* Initialize the hardware variables.
@@ -90,7 +90,7 @@ public class ColinOpMode extends LinearOpMode {
             // In this mode the Left stick moves the robot fwd and back, the Right stick turns left and right.
             left  = gamepad1.left_stick_y;
             right = gamepad1.right_stick_y;
-            right2 = gamepad2.left_stick_y * 0.25;
+            mech1 = gamepad2.left_stick_y * 0.25;
 
             //add a multiplication symbol to change speed (* 0.5)
             //alternative option - allows for gradient, but difficult to strafe and drive at the same
@@ -115,7 +115,7 @@ public class ColinOpMode extends LinearOpMode {
 
             robot.leftMotor.setPower(left);
             robot.rightMotor.setPower(right);
-            robot.rightMotor2.setPower(right2);
+            robot.mechMotor1.setPower(mech1);
             robot.centralMotor.setPower(central);
             robot.leftClaw.setPower(Range.clip(-gamepad2.right_stick_y, 1, -1));
             /*if (gamepad2.y) {
