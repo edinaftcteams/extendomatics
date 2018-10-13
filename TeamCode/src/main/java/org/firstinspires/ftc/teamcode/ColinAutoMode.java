@@ -774,7 +774,7 @@ public class ColinAutoMode extends ColinOpMode {
                 // Stop all motion;
 
                 robot.centralMotor.setPower(0);
-                //robot.rightMotor2.setPower(0);
+                robot.mechMotor1.setPower(0);
                 // Turn off RUN_TO_POSITION
 
                 robot.centralMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
