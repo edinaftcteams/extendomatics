@@ -69,7 +69,7 @@ public class Marker extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        Marker = (CRServo) hardwareMap.crservo.get("Marker");
+        Marker = (CRServo) hardwareMap.crservo.get("left_hand");
 
 
         leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
