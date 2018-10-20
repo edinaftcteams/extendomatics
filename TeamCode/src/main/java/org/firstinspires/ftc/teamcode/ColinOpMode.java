@@ -69,6 +69,7 @@ public class ColinOpMode extends LinearOpMode {
         double right;
         double central;
         double mech1;
+        double left2;
         double max;
 
         /* Initialize the hardware variables.
@@ -90,7 +91,8 @@ public class ColinOpMode extends LinearOpMode {
             // In this mode the Left stick moves the robot fwd and back, the Right stick turns left and right.
             left  = gamepad1.left_stick_y;
             right = gamepad1.right_stick_y;
-            mech1 = gamepad2.left_stick_y * 0.25;
+            mech1 = gamepad2.left_stick_y * 0.5;
+            left2 = gamepad2.right_stick_y;
 
             //add a multiplication symbol to change speed (* 0.5)
             //alternative option - allows for gradient, but difficult to strafe and drive at the same
@@ -117,7 +119,8 @@ public class ColinOpMode extends LinearOpMode {
             robot.rightMotor.setPower(right);
             robot.mechMotor1.setPower(mech1);
             robot.centralMotor.setPower(central);
-            robot.leftClaw.setPower(Range.clip(-gamepad2.right_stick_y, 1, -1));
+            robot.leftClaw.setPower(left2);
+            //robot.leftClaw.setPower(Range.clip(-gamepad2.right_stick_y, 1, -1));
             /*if (gamepad2.y) {
                 clawOffset2 += CLAW_SPEED;
             }
@@ -126,7 +129,7 @@ public class ColinOpMode extends LinearOpMode {
             }*/
             // Move both servos to new position.  Assume servos are mirror image of each other.
 
-            robot.leftClaw.setPower(robot.MID_SERVO + clawOffset1);
+            //robot.leftClaw.setPower(robot.MID_SERVO + clawOffset1);
             /*robot.leftClaw2.setPosition(robot.MID_SERVO + clawOffset1);
             robot.rightClaw.setPosition(robot.MID_SERVO - clawOffset2);
 */
