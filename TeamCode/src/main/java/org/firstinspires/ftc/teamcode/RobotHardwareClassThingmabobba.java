@@ -97,7 +97,7 @@ public class RobotHardwareClassThingmabobba
                 Thread.currentThread().interrupt();
             }
         }
-//butt
+
         // Reset the cycle clock for the next pass.
         period.reset();
     }
