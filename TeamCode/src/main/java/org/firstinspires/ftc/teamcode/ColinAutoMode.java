@@ -122,9 +122,6 @@ public class ColinAutoMode extends ColinOpMode {
 
 
 
-
-
-
     }
     public void gyroDrive ( double speed,
                             double distance,
