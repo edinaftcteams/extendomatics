@@ -83,7 +83,7 @@ public class Marker extends LinearOpMode {
         waitForStart();
         runtime.reset();
         Marker.setPower(-0.5);
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         Marker.setPower(0.0);
         Thread.sleep(500);
