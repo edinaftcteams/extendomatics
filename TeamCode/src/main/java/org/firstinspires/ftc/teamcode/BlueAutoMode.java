@@ -1,33 +1,41 @@
 package org.firstinspires.ftc.teamcode;
 
-
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.teamcode.ColinOpMode;
+import org.firstinspires.ftc.teamcode.RobotHardwareClassThingmabobba;
 
-@Autonomous(name="ColinAutoMode", group="RobotHardwareClassThingmabobba")
+@Autonomous(name="BlueAutoMode", group="RobotHardwareClassThingmabobba")
 
 
-public class ColinAutoMode extends ColinOpMode {
-    RobotHardwareClassThingmabobba robot = new RobotHardwareClassThingmabobba();   // Use a Pushbot's hardware
+public class BlueAutoMode extends ColinOpMode {
+    RobotHardwareClassThingmabobba robot   = new RobotHardwareClassThingmabobba();   // Use a Pushbot's hardware
     private ElapsedTime runtime = new ElapsedTime();
     BNO055IMU gyro;
 
-    static final double COUNTS_PER_MOTOR_REV = 1440;    // eg: TETRIX Motor Encoder
-    static final double DRIVE_GEAR_REDUCTION = 2.0;     // This is < 1.0 if geared UP
-    static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
-    static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
+    static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
+    static final double     DRIVE_GEAR_REDUCTION    = 2.0 ;     // This is < 1.0 if geared UP
+    static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
+    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.1415);
-    static final double DRIVE_SPEED = 0.6;
-    static final double TURN_SPEED = 0.5;
-    static final double FORWARD_SPEED = 0.25;
-    static final double HEADING_THRESHOLD = 1;      // As tight as we can make it with an integer gyro
-    static final double P_TURN_COEFF = 0.1;     // Larger is more responsive, but also less stable
-    static final double P_DRIVE_COEFF = 0.15;     // Larger is more responsive, but also less stable
-    static final double OPEN_SPEED = 0.1;
+    static final double     DRIVE_SPEED             = 0.6;
+    static final double     TURN_SPEED              = 0.5;
+    static final double     FORWARD_SPEED           = 0.15;
+    static final double     HEADING_THRESHOLD       = 1 ;      // As tight as we can make it with an integer gyro
+    static final double     P_TURN_COEFF            = 0.1;     // Larger is more responsive, but also less stable
+    static final double     P_DRIVE_COEFF           = 0.15;     // Larger is more responsive, but also less stable
+    static final double     OPEN_SPEED              = 0.1;
+
+
+
+
+
+
+
 
 
     @Override
@@ -41,12 +49,13 @@ public class ColinAutoMode extends ColinOpMode {
         robot.init(hardwareMap);
         gyro = hardwareMap.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-        parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-        parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
         parameters.calibrationDataFile = "Extendomatics3764.json";
         gyro.initialize(parameters);
         robot.leftMotor.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
         robot.rightMotor.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
+
 
 
         // Send telemetry message to signify robot waiting;
@@ -63,6 +72,8 @@ public class ColinAutoMode extends ColinOpMode {
         robot.rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
+
+
         // Send telemetry message to indicate successful Encoder reset
         telemetry.addData("Path0", "Starting at %7d :%7d",
                 robot.leftMotor.getCurrentPosition(),
@@ -70,32 +81,38 @@ public class ColinAutoMode extends ColinOpMode {
         telemetry.update();
 
 
+
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
+
 
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
-        /*encoderDriveY(DRIVE_SPEED, 17, 17, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
-        encoderDriveY(TURN_SPEED,   4.25, -4.25, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
-        encoderDriveY(DRIVE_SPEED, 4, 4, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
-        */
+            /*encoderDriveY(DRIVE_SPEED, 17, 17, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
+            encoderDriveY(TURN_SPEED,   4.25, -4.25, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
+            encoderDriveY(DRIVE_SPEED, 4, 4, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
+            */
         //gyroTurn( TURN_SPEED, 45.0);   // Turn  CCW to -45 Degrees
-        gyroDrive(DRIVE_SPEED, 18.0, 0.0);    // Drive FWD 48 inches
-        /*robot.centralMotor.setPower(FORWARD_SPEED);
+
+        robot.centralMotor.setPower(FORWARD_SPEED);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 3.0)) {
-            telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }*/
-        gyroDrive(DRIVE_SPEED, 12.0, 0.0);    // Drive FWD 48 inches
-        //robot.leftClaw.setPower(-FORWARD_SPEED);
-        runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 3.0)) {
+        while (opModeIsActive() && (runtime.seconds() < 1.0)) {
             telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
+        robot.centralMotor.setPower(0);
+        gyroDrive(DRIVE_SPEED, 28.0, 0.0);    // Drive FWD 48 inches
+
+        robot.leftClaw.setPower(-FORWARD_SPEED);
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < 1.0)) {
+            telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
+            telemetry.update();
+        }
+        gyroDrive(DRIVE_SPEED, -3, 0.0);    // Drive FWD 48 inches
+        sleep(10000);
 
 
         //encoderDriveX(DRIVE_SPEED, 10, 1.0);
@@ -108,26 +125,30 @@ public class ColinAutoMode extends ColinOpMode {
         sleep(3000);
 
 
+
+
+
+
+
     }
+    public void gyroDrive ( double speed,
+                            double distance,
+                            double angle) {
 
-    public void gyroDrive(double speed,
-                          double distance,
-                          double angle) {
-
-        int newLeftTarget;
-        int newRightTarget;
-        int moveCounts;
-        double max;
-        double error;
-        double steer;
-        double leftSpeed;
-        double rightSpeed;
+        int     newLeftTarget;
+        int     newRightTarget;
+        int     moveCounts;
+        double  max;
+        double  error;
+        double  steer;
+        double  leftSpeed;
+        double  rightSpeed;
 
         // Ensure that the opmode is still active
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            moveCounts = (int) (distance * COUNTS_PER_INCH);
+            moveCounts = (int)(distance * COUNTS_PER_INCH);
             newLeftTarget = robot.leftMotor.getCurrentPosition() + moveCounts;
             newRightTarget = robot.rightMotor.getCurrentPosition() + moveCounts;
 
@@ -160,7 +181,8 @@ public class ColinAutoMode extends ColinOpMode {
 
                 // Normalize speeds if either one exceeds +/- 1.0;
                 max = Math.max(Math.abs(leftSpeed), Math.abs(rightSpeed));
-                if (max > 1.0) {
+                if (max > 1.0)
+                {
                     leftSpeed /= max;
                     rightSpeed /= max;
                 }
@@ -169,11 +191,11 @@ public class ColinAutoMode extends ColinOpMode {
                 robot.rightMotor.setPower(rightSpeed);
 
                 // Display drive status for the driver.
-                telemetry.addData("Err/St", "%5.1f/%5.1f", error, steer);
-                telemetry.addData("Target", "%7d:%7d", newLeftTarget, newRightTarget);
-                telemetry.addData("Actual", "%7d:%7d", robot.leftMotor.getCurrentPosition(),
+                telemetry.addData("Err/St",  "%5.1f/%5.1f",  error, steer);
+                telemetry.addData("Target",  "%7d:%7d",      newLeftTarget,  newRightTarget);
+                telemetry.addData("Actual",  "%7d:%7d",      robot.leftMotor.getCurrentPosition(),
                         robot.rightMotor.getCurrentPosition());
-                telemetry.addData("Speed", "%5.2f:%5.2f", leftSpeed, rightSpeed);
+                telemetry.addData("Speed",   "%5.2f:%5.2f",  leftSpeed, rightSpeed);
                 telemetry.update();
             }
 
@@ -186,8 +208,7 @@ public class ColinAutoMode extends ColinOpMode {
             robot.rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
     }
-
-    public void gyroTurn(double speed, double angle) {
+    public void gyroTurn (  double speed, double angle) {
 
         // keep looping while we are still active, and not on heading.
         while (opModeIsActive() && !onHeading(speed, angle, P_TURN_COEFF)) {
@@ -195,8 +216,7 @@ public class ColinAutoMode extends ColinOpMode {
             telemetry.update();
         }
     }
-
-    public void gyroHold(double speed, double angle, double holdTime) {
+    public void gyroHold( double speed, double angle, double holdTime) {
 
         ElapsedTime holdTimer = new ElapsedTime();
 
@@ -212,11 +232,10 @@ public class ColinAutoMode extends ColinOpMode {
         robot.leftMotor.setPower(0);
         robot.rightMotor.setPower(0);
     }
-
     boolean onHeading(double speed, double angle, double PCoeff) {
-        double error;
-        double steer;
-        boolean onTarget = false;
+        double   error ;
+        double   steer ;
+        boolean  onTarget = false ;
         double leftSpeed;
         double rightSpeed;
 
@@ -225,13 +244,14 @@ public class ColinAutoMode extends ColinOpMode {
 
         if (Math.abs(error) <= HEADING_THRESHOLD) {
             steer = 0.0;
-            leftSpeed = 0.0;
+            leftSpeed  = 0.0;
             rightSpeed = 0.0;
             onTarget = true;
-        } else {
+        }
+        else {
             steer = getSteer(error, PCoeff);
-            rightSpeed = speed * steer;
-            leftSpeed = -rightSpeed;
+            rightSpeed  = speed * steer;
+            leftSpeed   = -rightSpeed;
         }
 
         // Send desired speeds to motors.
@@ -245,22 +265,19 @@ public class ColinAutoMode extends ColinOpMode {
 
         return onTarget;
     }
-
     public double getError(double targetAngle) {
 
         double robotError;
 
         // calculate error in -179 to +180 range  (
         robotError = targetAngle - gyro.getAngularOrientation().firstAngle;
-        while (robotError > 180) robotError -= 360;
+        while (robotError > 180)  robotError -= 360;
         while (robotError <= -180) robotError += 360;
         return robotError;
     }
-
     public double getSteer(double error, double PCoeff) {
         return Range.clip(error * PCoeff, -1, 1);
     }
-
     /*
      *  Method to perfmorm a relative move, based on encoder counts.
      *  Encoders are not reset as the move is based on the current position.
@@ -269,82 +286,86 @@ public class ColinAutoMode extends ColinOpMode {
      *  2) Move runs out of time
      *  3) Driver stops the opmode running.
      */
-    /*public void encoderDriveY(double speed,
-                              double yInches,
-                              double timeoutS) {
-        int newLeftTarget;
-        int newRightTarget;
+        /*public void encoderDriveY(double speed,
+                                  double yInches,
+                                  double timeoutS) {
+            int newLeftTarget;
+            int newRightTarget;
 
 
 
 
-        // Ensure that the opmode is still active
-        if (opModeIsActive()) {
+            // Ensure that the opmode is still active
+            if (opModeIsActive()) {
 
 
-            // Determine new target position, and pass to motor controller
-            newLeftTarget = robot.leftMotor.getCurrentPosition() + (int)(yInches * COUNTS_PER_INCH);
-            newRightTarget = robot.rightMotor.getCurrentPosition() + (int)(yInches * COUNTS_PER_INCH);
-            robot.leftMotor.setTargetPosition(newLeftTarget);
-            robot.rightMotor.setTargetPosition(newRightTarget);
+                // Determine new target position, and pass to motor controller
+                newLeftTarget = robot.leftMotor.getCurrentPosition() + (int)(yInches * COUNTS_PER_INCH);
+                newRightTarget = robot.rightMotor.getCurrentPosition() + (int)(yInches * COUNTS_PER_INCH);
+                robot.leftMotor.setTargetPosition(newLeftTarget);
+                robot.rightMotor.setTargetPosition(newRightTarget);
 
 
-            // Turn On RUN_TO_POSITION
-            robot.leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                // Turn On RUN_TO_POSITION
+                robot.leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                robot.rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
 
 
 
-            // reset the timeout time and start motion.
-            runtime.reset();
-            robot.directDrive(0,(newLeftTarget > 0 ? -1 * Math.abs(speed) : Math.abs(speed)), 0);
+                // reset the timeout time and start motion.
+                runtime.reset();
+                robot.directDrive(0,(newLeftTarget > 0 ? -1 * Math.abs(speed) : Math.abs(speed)), 0);
 
 
-            // keep looping while we are still active, and there is time left, and both motors are running.
-            while (opModeIsActive() &&
-                    (runtime.seconds() < timeoutS) &&
-                    (robot.leftMotor.isBusy() && robot.rightMotor.isBusy())) {
+                // keep looping while we are still active, and there is time left, and both motors are running.
+                while (opModeIsActive() &&
+                        (runtime.seconds() < timeoutS) &&
+                        (robot.leftMotor.isBusy() && robot.rightMotor.isBusy())) {
 
 
-                // Display it for the driver.
-                telemetry.addData("Path1",  "Running to %7d :%7d", newLeftTarget,  newRightTarget);
-                telemetry.addData("Path2",  "Running at %7d :%7d",
-                        robot.leftMotor.getCurrentPosition(),
-                        robot.rightMotor.getCurrentPosition());
-                telemetry.update();
+                    // Display it for the driver.
+                    telemetry.addData("Path1",  "Running to %7d :%7d", newLeftTarget,  newRightTarget);
+                    telemetry.addData("Path2",  "Running at %7d :%7d",
+                            robot.leftMotor.getCurrentPosition(),
+                            robot.rightMotor.getCurrentPosition());
+                    telemetry.update();
+                }
+
+
+                // Stop all motion;
+                robot.leftMotor.setPower(0);
+                robot.rightMotor.setPower(0);
+                //robot.rightMotor2.setPower(0);
+                // Turn off RUN_TO_POSITION
+                robot.leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //  sleep(250);   // optional pause after each move
             }
-
-
-            // Stop all motion;
-            robot.leftMotor.setPower(0);
-            robot.rightMotor.setPower(0);
-            //robot.rightMotor2.setPower(0);
-            // Turn off RUN_TO_POSITION
-            robot.leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            //  sleep(250);   // optional pause after each move
         }
-    }
-    */
+        */
     public void encoderDriveX(double speed,
                               double xInches,
                               double timeoutS) {
         int newTarget;
 
 
+
+
         // Ensure that the opmode is still active
         if (opModeIsActive()) {
 
 
             // Determine new target position, and pass to motor controller
-            newTarget = robot.centralMotor.getCurrentPosition() + (int) (xInches * COUNTS_PER_INCH);
+            newTarget = robot.centralMotor.getCurrentPosition() + (int)(xInches * COUNTS_PER_INCH);
             robot.centralMotor.setTargetPosition(newTarget);
 
 
             // Turn On RUN_TO_POSITION
             robot.centralMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             //robot.rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+
 
 
             // reset the timeout time and start motion.
@@ -359,8 +380,8 @@ public class ColinAutoMode extends ColinOpMode {
 
 
                 // Display it for the driver.
-                telemetry.addData("Path1", "Running to %7d :%7d", newTarget);
-                telemetry.addData("Path2", "Running at %7d",
+                telemetry.addData("Path1",  "Running to %7d :%7d", newTarget);
+                telemetry.addData("Path2",  "Running at %7d",
                         robot.centralMotor.getCurrentPosition());
                 telemetry.update();
             }
@@ -369,7 +390,7 @@ public class ColinAutoMode extends ColinOpMode {
             // Stop all motion;
 
             robot.centralMotor.setPower(0);
-            //robot.rightMotor2.setPower(0);
+            robot.mechMotor1.setPower(0);
             // Turn off RUN_TO_POSITION
 
             robot.centralMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
