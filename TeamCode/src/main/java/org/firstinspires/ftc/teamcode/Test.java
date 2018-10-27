@@ -6,24 +6,20 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.ColinOpMode;
-import org.firstinspires.ftc.teamcode.RobotHardwareClassThingmabobba;
-
 @Autonomous(name="BlueAutoMode", group="RobotHardwareClassThingmabobba")
 
 
-public class BlueAutoMode extends ColinOpMode {
+public class Test extends ColinOpMode {
     RobotHardwareClassThingmabobba robot   = new RobotHardwareClassThingmabobba();   // Use a Pushbot's hardware
     private ElapsedTime runtime = new ElapsedTime();
     BNO055IMU gyro;
 
     static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
     static final double     DRIVE_GEAR_REDUCTION    = 2.0 ;     // This is < 1.0 if geared UP
-    static final double     WHEEL_DIAMETER_INCHES   =4.0 ;     // For figuring circumference
+    static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 0.6;
-    static final double     STRAFE_SPEED            = 0.5;
     static final double     TURN_SPEED              = 0.5;
     static final double     FORWARD_SPEED           = 0.15;
     static final double     HEADING_THRESHOLD       = 1 ;      // As tight as we can make it with an integer gyro
@@ -56,7 +52,7 @@ public class BlueAutoMode extends ColinOpMode {
         gyro.initialize(parameters);
         robot.leftMotor.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
         robot.rightMotor.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
-        robot.centralMotor.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
+
 
 
         // Send telemetry message to signify robot waiting;
@@ -66,13 +62,11 @@ public class BlueAutoMode extends ColinOpMode {
 
         robot.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.centralMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         idle();
 
 
         robot.leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.centralMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
 
@@ -80,8 +74,7 @@ public class BlueAutoMode extends ColinOpMode {
         // Send telemetry message to indicate successful Encoder reset
         telemetry.addData("Path0", "Starting at %7d :%7d",
                 robot.leftMotor.getCurrentPosition(),
-                robot.rightMotor.getCurrentPosition(),
-                robot.centralMotor.getCurrentPosition());
+                robot.rightMotor.getCurrentPosition());
         telemetry.update();
 
 
@@ -100,24 +93,22 @@ public class BlueAutoMode extends ColinOpMode {
             */
         //gyroTurn( TURN_SPEED, 45.0);   // Turn  CCW to -45 Degrees
 
-        /*robot.centralMotor.setPower(FORWARD_SPEED);
+        robot.centralMotor.setPower(FORWARD_SPEED);
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 1.0)) {
             telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
-        robot.centralMotor.setPower(0);*/
+        robot.centralMotor.setPower(0);
         gyroDrive(DRIVE_SPEED, 28.0, 0.0);    // Drive FWD 48 inches
-        gyroDrive(TURN_SPEED, 0.0, 90.0);
-        gyroDrive(DRIVE_SPEED, -3, 0.0);    // Drive FWD 48 inches
-        gyroDrive(STRAFE_SPEED,  4,90.0);
-        //robot.leftClaw.setPower(-FORWARD_SPEED);
+
+        robot.leftClaw.setPower(-FORWARD_SPEED);
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 1.0)) {
             telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
-
+        gyroDrive(DRIVE_SPEED, -3, 0.0);    // Drive FWD 48 inches
         sleep(10000);
 
 
@@ -143,14 +134,12 @@ public class BlueAutoMode extends ColinOpMode {
 
         int     newLeftTarget;
         int     newRightTarget;
-        int     newCentralTarget;
         int     moveCounts;
         double  max;
         double  error;
         double  steer;
         double  leftSpeed;
         double  rightSpeed;
-        double  centralSpeed;
 
         // Ensure that the opmode is still active
         if (opModeIsActive()) {
@@ -159,22 +148,18 @@ public class BlueAutoMode extends ColinOpMode {
             moveCounts = (int)(distance * COUNTS_PER_INCH);
             newLeftTarget = robot.leftMotor.getCurrentPosition() + moveCounts;
             newRightTarget = robot.rightMotor.getCurrentPosition() + moveCounts;
-            newCentralTarget = robot.centralMotor.getCurrentPosition()  + moveCounts;
 
             // Set Target and Turn On RUN_TO_POSITION
             robot.leftMotor.setTargetPosition(newLeftTarget);
             robot.rightMotor.setTargetPosition(newRightTarget);
-            robot.centralMotor.setTargetPosition(newCentralTarget);
 
             robot.leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             robot.rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.centralMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             // start motion.
             speed = Range.clip(Math.abs(speed), 0.0, 1.0);
             robot.leftMotor.setPower(speed);
             robot.rightMotor.setPower(speed);
-            robot.centralMotor.setPower(speed);
 
             // keep looping while we are still active, and BOTH motors are running.
             while (opModeIsActive() &&
@@ -190,7 +175,6 @@ public class BlueAutoMode extends ColinOpMode {
 
                 leftSpeed = speed - steer;
                 rightSpeed = speed + steer;
-                centralSpeed = speed +- steer;
 
                 // Normalize speeds if either one exceeds +/- 1.0;
                 max = Math.max(Math.abs(leftSpeed), Math.abs(rightSpeed));
@@ -202,29 +186,37 @@ public class BlueAutoMode extends ColinOpMode {
 
                 robot.leftMotor.setPower(leftSpeed);
                 robot.rightMotor.setPower(rightSpeed);
-                robot.centralMotor.setPower(centralSpeed);
 
                 // Display drive status for the driver.
                 telemetry.addData("Err/St",  "%5.1f/%5.1f",  error, steer);
-                telemetry.addData("Target",  "%7d:%7d",      newLeftTarget,  newRightTarget, newCentralTarget);
+                telemetry.addData("Target",  "%7d:%7d",      newLeftTarget,  newRightTarget);
                 telemetry.addData("Actual",  "%7d:%7d",      robot.leftMotor.getCurrentPosition(),
-                        robot.rightMotor.getCurrentPosition(),
-                        robot.centralMotor.getCurrentPosition());
-                telemetry.addData("Speed",   "%5.2f:%5.2f",  leftSpeed, rightSpeed, centralSpeed);
+                        robot.rightMotor.getCurrentPosition());
+                telemetry.addData("Speed",   "%5.2f:%5.2f",  leftSpeed, rightSpeed);
                 telemetry.update();
             }
 
             // Stop all motion;
             robot.leftMotor.setPower(0);
             robot.rightMotor.setPower(0);
-            robot.centralMotor.setPower(0);
 
             // Turn off RUN_TO_POSITION
             robot.leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.centralMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
     }
+
+    /**
+     *  Method to spin on central axis to point in a new direction.
+     *  Move will stop if either of these conditions occur:
+     *  1) Move gets to the heading (angle)
+     *  2) Driver stops the opmode running.
+     *
+     * @param speed Desired speed of turn.
+     * @param angle      Absolute Angle (in Degrees) relative to last gyro reset.
+     *                   0 = fwd. +ve is CCW from fwd. -ve is CW from forward.
+     *                   If a relative angle is required, add/subtract from current heading.
+     */
     public void gyroTurn (  double speed, double angle) {
 
         // keep looping while we are still active, and not on heading.
@@ -233,6 +225,17 @@ public class BlueAutoMode extends ColinOpMode {
             telemetry.update();
         }
     }
+
+    /**
+     *  Method to obtain & hold a heading for a finite amount of time
+     *  Move will stop once the requested time has elapsed
+     *
+     * @param speed      Desired speed of turn.
+     * @param angle      Absolute Angle (in Degrees) relative to last gyro reset.
+     *                   0 = fwd. +ve is CCW from fwd. -ve is CW from forward.
+     *                   If a relative angle is required, add/subtract from current heading.
+     * @param holdTime   Length of time (in seconds) to hold the specified heading.
+     */
     public void gyroHold( double speed, double angle, double holdTime) {
 
         ElapsedTime holdTimer = new ElapsedTime();
@@ -248,15 +251,24 @@ public class BlueAutoMode extends ColinOpMode {
         // Stop all motion;
         robot.leftMotor.setPower(0);
         robot.rightMotor.setPower(0);
-        robot.centralMotor.setPower(0);
     }
+
+    /**
+     * Perform one cycle of closed loop heading control.
+     *
+     * @param speed     Desired speed of turn.
+     * @param angle     Absolute Angle (in Degrees) relative to last gyro reset.
+     *                  0 = fwd. +ve is CCW from fwd. -ve is CW from forward.
+     *                  If a relative angle is required, add/subtract from current heading.
+     * @param PCoeff    Proportional Gain coefficient
+     * @return
+     */
     boolean onHeading(double speed, double angle, double PCoeff) {
         double   error ;
         double   steer ;
         boolean  onTarget = false ;
         double leftSpeed;
         double rightSpeed;
-        double centralSpeed;
 
         // determine turn power based on +/- error
         error = getError(angle);
@@ -265,20 +277,17 @@ public class BlueAutoMode extends ColinOpMode {
             steer = 0.0;
             leftSpeed  = 0.0;
             rightSpeed = 0.0;
-            centralSpeed = 0.0;
             onTarget = true;
         }
         else {
             steer = getSteer(error, PCoeff);
             rightSpeed  = speed * steer;
             leftSpeed   = -rightSpeed;
-            centralSpeed = rightSpeed;
         }
 
         // Send desired speeds to motors.
         robot.leftMotor.setPower(leftSpeed);
         robot.rightMotor.setPower(rightSpeed);
-        robot.centralMotor.setPower(centralSpeed);
 
         // Display it for the driver.
         telemetry.addData("Target", "%5.2f", angle);
@@ -287,6 +296,13 @@ public class BlueAutoMode extends ColinOpMode {
 
         return onTarget;
     }
+
+    /**
+     * getError determines the error between the target angle and the robot's current heading
+     * @param   targetAngle  Desired angle (relative to global reference established at last Gyro Reset).
+     * @return  error angle: Degrees in the range +/- 180. Centered on the robot's frame of reference
+     *          +ve error means the robot should turn LEFT (CCW) to reduce error.
+     */
     public double getError(double targetAngle) {
 
         double robotError;
@@ -297,9 +313,19 @@ public class BlueAutoMode extends ColinOpMode {
         while (robotError <= -180) robotError += 360;
         return robotError;
     }
+
+    /**
+     * returns desired steering force.  +/- 1 range.  +ve = steer left
+     * @param error   Error angle in robot relative degrees
+     * @param PCoeff  Proportional Gain Coefficient
+     * @return
+     */
     public double getSteer(double error, double PCoeff) {
         return Range.clip(error * PCoeff, -1, 1);
     }
+
+
+
     /*
      *  Method to perfmorm a relative move, based on encoder counts.
      *  Encoders are not reset as the move is based on the current position.
