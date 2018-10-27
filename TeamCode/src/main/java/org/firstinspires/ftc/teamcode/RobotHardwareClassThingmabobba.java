@@ -64,8 +64,8 @@ public class RobotHardwareClassThingmabobba
         // May want to use RUN_USING_ENCODERS if encoders are installed.
         leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        mechMotor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        centralMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        mechMotor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        centralMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftClaw = hwMap.crservo.get("left_hand");
         /*rightClaw = hwMap.servo.get("right_hand");
         leftClaw2 = hwMap.servo.get("left_hand2")
