@@ -29,6 +29,7 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -62,6 +63,8 @@ public class Marker extends LinearOpMode {
     private DcMotor leftDrive = null;
     private DcMotor rightDrive = null;
     private CRServo Marker = null;
+    //private BNO055IMU gyro;
+
 
 
     @Override
@@ -69,28 +72,32 @@ public class Marker extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
+        leftDrive = hardwareMap.dcMotor.get("Left_Motor");
+        rightDrive = hardwareMap.dcMotor.get("Right_Motor");
+        leftDrive.setDirection(DcMotor.Direction.REVERSE);
+        rightDrive.setDirection(DcMotor.Direction.FORWARD);
+
         Marker = (CRServo) hardwareMap.crservo.get("Marker");
 
 
-        leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
-        rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
-
-
-        leftDrive.setDirection(DcMotor.Direction.FORWARD);
-        rightDrive.setDirection(DcMotor.Direction.REVERSE);
-
+        //leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
+        //rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
 
         waitForStart();
         runtime.reset();
+        leftDrive.setpower(0.5);
+        rightDrive.setpower(0.5);
+        sleep(100000);
+        leftDrive.setpower(0.0);
+        rightDrive.setpower(0.0);
         Marker.setPower(-0.5);
-        Thread.sleep(2000);
+        Thread.sleep(2500);
 
         Marker.setPower(0.0);
-        Thread.sleep(500);
+        Thread.sleep(1000);
 
         Marker.setPower(0.5);
-        Thread.sleep(2000);
-
+        Thread.sleep(2500);
 
     }
 }
