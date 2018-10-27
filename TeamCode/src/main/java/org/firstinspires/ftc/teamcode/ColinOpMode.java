@@ -100,9 +100,9 @@ public class ColinOpMode extends LinearOpMode {
 
             //disadvantage - no power gradient
             if(gamepad1.left_bumper) {
-                central = -1.0;
+                central = 0.5;
             } else if(gamepad1.right_bumper) {
-                central = 1.0;
+                central = -0.5;
             }
 
             // Normalize the values so neither exceed +/- 1.0
