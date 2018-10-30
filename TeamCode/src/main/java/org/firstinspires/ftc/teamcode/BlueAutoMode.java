@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
@@ -11,7 +12,7 @@ import org.firstinspires.ftc.teamcode.RobotHardwareClassThingmabobba;
 
 @Autonomous(name="BlueAutoMode", group="RobotHardwareClassThingmabobba")
 
-
+@Disabled
 public class BlueAutoMode extends ColinOpMode {
     RobotHardwareClassThingmabobba robot   = new RobotHardwareClassThingmabobba();   // Use a Pushbot's hardware
     private ElapsedTime runtime = new ElapsedTime();
@@ -40,6 +41,7 @@ public class BlueAutoMode extends ColinOpMode {
 
 
     @Override
+
     public void runOpMode() {
 
 

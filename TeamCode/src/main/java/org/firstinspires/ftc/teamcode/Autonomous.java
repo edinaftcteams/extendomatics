@@ -166,9 +166,6 @@ public class Autonomous extends LinearOpMode {
 
                 robot.leftMotor.setPower(leftSpeed);
                 robot.rightMotor.setPower(rightSpeed);
-
-                // Display drive status for the driver.
-                telemetry.addData("Err/St",  "%5.1f/%5.1f",  error, steer);
                 telemetry.addData("Target",  "%7d:%7d",      newLeftTarget,  newRightTarget);
                 telemetry.addData("Actual",  "%7d:%7d",      robot.leftMotor.getCurrentPosition(),
                         robot.rightMotor.getCurrentPosition());
