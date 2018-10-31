@@ -40,7 +40,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-
+//Move right, Move left, move forward, drop marker
 /**
  * This file contains an minimal example of a Linear "OpMode". An OpMode is a 'program' that runs in either
  * the autonomous or the teleop period of an FTC match. The names of OpModes appear on the menu
@@ -62,7 +62,10 @@ public class Marker extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor leftDrive = null;
     private DcMotor rightDrive = null;
+    private DcMotor HDrive = null;
+    private DcMotor Claw = null;
     private CRServo Marker = null;
+    double power = 0.5
     //private BNO055IMU gyro;
 
 
@@ -73,40 +76,53 @@ public class Marker extends LinearOpMode {
         telemetry.update();
 
 
-        leftDrive = hardwareMap.dcMotor.get("Left_Motor");
-        rightDrive = hardwareMap.dcMotor.get("Right_Motor");
+        leftDrive = hardwareMap.dcMotor.get("left_drive");
+        rightDrive = hardwareMap.dcMotor.get("right_drive");
+        HDrive = hardwareMap.dcMotor.get("central_drive");
+        Claw = hardwareMap.dcMotor.get("mech_drive1");
+
         leftDrive.setDirection(DcMotor.Direction.REVERSE);
         rightDrive.setDirection(DcMotor.Direction.FORWARD);
 
         Marker = (CRServo) hardwareMap.crservo.get("left_hand");
 
 
-        leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
-        rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
-
-
-        Marker = (CRServo) hardwareMap.crservo.get("Marker");
-
-
-        //leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
-        //rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
-
         waitForStart();
         runtime.reset();
+<<<<<<< HEAD
         leftDrive.setPower(0.5);
         rightDrive.setPower(0.5);
         sleep(7000);
         leftDrive.setPower(0.0);
         rightDrive.setPower(0.0);
+=======
+        Claw.setPower(-0.5);
+        sleep(3000);
+        Claw.setPower(0.5);
+        sleep(250);
+        HDrive.setPower(0.5);
+        sleep(2000);
+        leftDrive.setPower(power);
+        rightDrive.setPower(power);
+        sleep(2000);
+        HDrive.setPower(-0.5);
+        sleep(2000);
+        leftDrive.setPower(power);
+        rightDrive.setPower(power);
+        sleep(7000);
+        leftDrive.setPower(0.0);
+        rightDrive.setPower(0.0);
+        sleep(1000);
+>>>>>>> 9981996fd35090f8260fc47ea30e2973e26b6769
 
         Marker.setPower(-0.5);
-        Thread.sleep(2500);
+        Thread.sleep(4000);
 
         Marker.setPower(0.0);
-        Thread.sleep(1000);
+        Thread.sleep(5000);
 
         Marker.setPower(0.5);
-        Thread.sleep(2500);
+        Thread.sleep(4000);
 
     }
 }
