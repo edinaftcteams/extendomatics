@@ -76,23 +76,16 @@ public class Marker extends LinearOpMode {
         telemetry.update();
 
 
-        leftDrive = hardwareMap.dcMotor.get("Left_Motor");
-        rightDrive = hardwareMap.dcMotor.get("Right_Motor");
+        leftDrive = hardwareMap.dcMotor.get("left_drive");
+        rightDrive = hardwareMap.dcMotor.get("right_drive");
+        HDrive = hardwareMap.dcMotor.get("central_drive");
+        Claw = hardwareMap.dcMotor.get("mech_drive1");
+
         leftDrive.setDirection(DcMotor.Direction.REVERSE);
         rightDrive.setDirection(DcMotor.Direction.FORWARD);
 
         Marker = (CRServo) hardwareMap.crservo.get("left_hand");
 
-
-        leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
-        rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
-
-
-        Marker = (CRServo) hardwareMap.crservo.get("Marker");
-
-
-        //leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
-        //rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
 
         waitForStart();
         runtime.reset();
