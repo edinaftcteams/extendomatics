@@ -65,7 +65,7 @@ public class Marker extends LinearOpMode {
     private DcMotor HDrive = null;
     private DcMotor Claw = null;
     private CRServo Marker = null;
-    double power = 0.5
+    double power = 0.5;
     //private BNO055IMU gyro;
 
 
