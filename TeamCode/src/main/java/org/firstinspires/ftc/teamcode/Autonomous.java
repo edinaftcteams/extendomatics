@@ -36,13 +36,10 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+@com.qualcomm.robotcore.eventloop.opmode.
 
 
-
-
-
-
-@TeleOp(name="Basic: Linear OpMode", group="Linear Opmode")
+        Autonomous(name="Autonomous", group="RobotHardwareClassThingmabobba")
 //@Disabled
 public class Autonomous extends LinearOpMode {
 

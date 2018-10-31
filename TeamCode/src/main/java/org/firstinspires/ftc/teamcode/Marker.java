@@ -93,11 +93,11 @@ public class Marker extends LinearOpMode {
 
         waitForStart();
         runtime.reset();
-        leftDrive.setpower(0.5);
-        rightDrive.setpower(0.5);
+        leftDrive.setPower(0.5);
+        rightDrive.setPower(0.5);
         sleep(7000);
-        leftDrive.setpower(0.0);
-        rightDrive.setpower(0.0);
+        leftDrive.setPower(0.0);
+        rightDrive.setPower(0.0);
 
         Marker.setPower(-0.5);
         Thread.sleep(2500);
