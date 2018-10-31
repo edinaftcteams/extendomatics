@@ -40,7 +40,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-
+//Move right, Move left, move forward, drop marker
 /**
  * This file contains an minimal example of a Linear "OpMode". An OpMode is a 'program' that runs in either
  * the autonomous or the teleop period of an FTC match. The names of OpModes appear on the menu
@@ -62,7 +62,10 @@ public class Marker extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor leftDrive = null;
     private DcMotor rightDrive = null;
+    private DcMotor HDrive = null;
+    private DcMotor Claw = null;
     private CRServo Marker = null;
+    double power = 0.5
     //private BNO055IMU gyro;
 
 
@@ -93,20 +96,32 @@ public class Marker extends LinearOpMode {
 
         waitForStart();
         runtime.reset();
-        leftDrive.setpower(0.5);
-        rightDrive.setpower(0.5);
+        Claw.setPower(-0.5);
+        sleep(3000);
+        Claw.setPower(0.5);
+        sleep(250);
+        HDrive.setPower(0.5);
+        sleep(2000);
+        leftDrive.setPower(power);
+        rightDrive.setPower(power);
+        sleep(2000);
+        HDrive.setPower(-0.5);
+        sleep(2000);
+        leftDrive.setPower(power);
+        rightDrive.setPower(power);
         sleep(7000);
-        leftDrive.setpower(0.0);
-        rightDrive.setpower(0.0);
+        leftDrive.setPower(0.0);
+        rightDrive.setPower(0.0);
+        sleep(1000);
 
         Marker.setPower(-0.5);
-        Thread.sleep(2500);
+        Thread.sleep(4000);
 
         Marker.setPower(0.0);
-        Thread.sleep(1000);
+        Thread.sleep(5000);
 
         Marker.setPower(0.5);
-        Thread.sleep(2500);
+        Thread.sleep(4000);
 
     }
 }
