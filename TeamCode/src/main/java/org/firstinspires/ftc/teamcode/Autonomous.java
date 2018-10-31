@@ -36,13 +36,10 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+@com.qualcomm.robotcore.eventloop.opmode.
 
 
-
-
-
-
-@TeleOp(name="Basic: Linear OpMode", group="Linear Opmode")
+        Autonomous(name="Autonomous", group="RobotHardwareClassThingmabobba")
 //@Disabled
 public class Autonomous extends LinearOpMode {
 
@@ -72,6 +69,7 @@ public class Autonomous extends LinearOpMode {
         gyro = hardwareMap.get(BNO055IMU.class, "Gyro");
 
         telemetry.addData(">", "Calibrating gyro and resetting encoder");
+        //test
         telemetry.update();
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
