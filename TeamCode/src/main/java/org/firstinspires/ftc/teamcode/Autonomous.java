@@ -41,8 +41,7 @@ import com.qualcomm.robotcore.util.Range;
 
 
 
-
-@TeleOp(name="Basic: Linear OpMode", group="Linear Opmode")
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Autonomous", group="RobotHardwareClassThingmabobba")
 //@Disabled
 public class Autonomous extends LinearOpMode {
 

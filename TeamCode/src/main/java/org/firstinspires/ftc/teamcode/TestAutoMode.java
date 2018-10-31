@@ -78,7 +78,7 @@ public class TestAutoMode extends LinearOpMode {
     static final double     DRIVE_SPEED             = 0.6;
     static final double     TURN_SPEED              = 0.5;
     static final double     STRAFE_SPEED            = 0.5;
-
+    static final double     MECH_SPEED              = 0.5;
     @Override
     public void runOpMode() {
 
@@ -109,7 +109,12 @@ public class TestAutoMode extends LinearOpMode {
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
-
+        robot.mechMotor1.setPower(MECH_SPEED);
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < 1.0)) {
+            telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
+            telemetry.update();
+        }
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
         encoderDrive(DRIVE_SPEED,  48,  48, 0, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
