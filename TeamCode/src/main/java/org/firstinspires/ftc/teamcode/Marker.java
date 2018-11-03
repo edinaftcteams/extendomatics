@@ -96,12 +96,12 @@ public class Marker extends LinearOpMode {
         sleep(500);
         Claw.setPower(0.5);
         sleep(250);
-        HDrive.setPower(0.5);
+        HDrive.setPower(-0.5);
         sleep(1000);
         leftDrive.setPower(power);
         rightDrive.setPower(power);
         sleep(1500);
-        HDrive.setPower(-0.5);
+        HDrive.setPower(0.5);
         sleep(1000);
         leftDrive.setPower(power);
         rightDrive.setPower(power);
