@@ -93,17 +93,18 @@ public class ColinOpMode extends LinearOpMode {
             right = gamepad1.right_stick_y;
             mech1 = gamepad2.left_stick_y * 0.5;
             left2 = gamepad2.right_stick_y;
+            central = gamepad1.right_stick_x;
 
             //add a multiplication symbol to change speed (* 0.5)
             //alternative option - allows for gradient, but difficult to strafe and drive at the same
-            central = gamepad1.left_trigger;
+            //central = gamepad1.left_trigger;
 
             //disadvantage - no power gradient
-            if(gamepad1.left_bumper) {
-                central = 0.5;
-            } else if(gamepad1.right_bumper) {
+            /*if(gamepad1.left_bumper) {
                 central = -0.5;
-            }
+            } else if(gamepad1.right_bumper) {
+                central = 0.5;
+            }*/
 
             // Normalize the values so neither exceed +/- 1.0
             /* max = Math.max(Math.abs(left), Math.abs(right));

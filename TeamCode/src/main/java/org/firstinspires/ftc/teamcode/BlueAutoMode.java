@@ -39,7 +39,6 @@ public class BlueAutoMode extends ColinOpMode {
 
 
 
-
     @Override
 
     public void runOpMode() {
@@ -421,5 +420,6 @@ public class BlueAutoMode extends ColinOpMode {
             //  sleep(250);   // optional pause after each move
         }
     }
+
 }
 
