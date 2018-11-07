@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.RobotHardwareClassThingmabobba;
 
 @Autonomous(name="BlueAutoMode", group="RobotHardwareClassThingmabobba")
 
-@Disabled
+//@Disabled
 public class BlueAutoMode extends ColinOpMode {
     RobotHardwareClassThingmabobba robot   = new RobotHardwareClassThingmabobba();   // Use a Pushbot's hardware
     private ElapsedTime runtime = new ElapsedTime();
@@ -31,7 +31,6 @@ public class BlueAutoMode extends ColinOpMode {
     static final double     P_TURN_COEFF            = 0.1;     // Larger is more responsive, but also less stable
     static final double     P_DRIVE_COEFF           = 0.15;     // Larger is more responsive, but also less stable
     static final double     OPEN_SPEED              = 0.1;
-
 
 
 
@@ -421,5 +420,6 @@ public class BlueAutoMode extends ColinOpMode {
             //  sleep(250);   // optional pause after each move
         }
     }
+
 }
 

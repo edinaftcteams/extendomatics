@@ -57,7 +57,6 @@ import com.qualcomm.robotcore.util.Range;
 @Autonomous(name="Marker", group="Autonomous")
 //@Disabled
 public class Marker extends LinearOpMode {
-
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor leftDrive = null;
@@ -89,13 +88,11 @@ public class Marker extends LinearOpMode {
 
         waitForStart();
         runtime.reset();
-
         leftDrive.setPower(0.5);
         rightDrive.setPower(0.5);
         sleep(7000);
         leftDrive.setPower(0.0);
         rightDrive.setPower(0.0);
-
         Claw.setPower(-0.5);
         sleep(3000);
         Claw.setPower(0.5);
