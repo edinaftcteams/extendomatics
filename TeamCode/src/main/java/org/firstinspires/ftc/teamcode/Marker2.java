@@ -22,7 +22,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Marker", group="Autonomous")
+@Autonomous(name="Marker2", group="Autonomous")
 //@Disabled
 public class Marker2 extends LinearOpMode {
 
