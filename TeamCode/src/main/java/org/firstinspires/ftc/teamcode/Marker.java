@@ -85,16 +85,16 @@ public class Marker extends LinearOpMode {
 
         Marker = (CRServo) hardwareMap.crservo.get("left_hand");
 
-        Claw.setPower(-1);
+        Claw.setPower(1);
         sleep(2000);
         waitForStart();
         runtime.reset();
         //Dropdown with claw
-        Claw.setPower(1);
+        Claw.setPower(-1);
         sleep(1920);
         Claw.setPower(0);
         sleep(250);
-        Claw.setPower(0.5);
+        Claw.setPower(-0.5);
         sleep(250);
 
         //Strafing Out
