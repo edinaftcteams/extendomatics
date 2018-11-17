@@ -88,11 +88,11 @@ public class Marker extends LinearOpMode {
         waitForStart();
         runtime.reset();
         //Dropdown with claw
-        Claw.setPower(-1);
+        Claw.setPower(1);
         sleep(1920);
         Claw.setPower(0);
         sleep(250);
-        Claw.setPower(-0.5);
+        Claw.setPower(0.5);
         sleep(250);
 
         //Strafing Out
