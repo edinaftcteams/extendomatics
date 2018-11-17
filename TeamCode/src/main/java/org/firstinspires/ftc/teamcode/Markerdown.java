@@ -83,7 +83,7 @@ public class Markerdown extends LinearOpMode {
 
         waitForStart();
         runtime.reset();
-        Claw.setPower(1);
+        Claw.setPower(-1);
         sleep(1250);
 
     }
