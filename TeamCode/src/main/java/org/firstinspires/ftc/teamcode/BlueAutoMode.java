@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.RobotHardwareClassThingmabobba;
 
 @Autonomous(name="BlueAutoMode", group="RobotHardwareClassThingmabobba")
 
-//@Disabled
+@Disabled
 public class BlueAutoMode extends ColinOpMode {
     RobotHardwareClassThingmabobba robot   = new RobotHardwareClassThingmabobba();   // Use a Pushbot's hardware
     private ElapsedTime runtime = new ElapsedTime();
