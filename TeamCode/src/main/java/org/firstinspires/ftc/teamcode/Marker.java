@@ -88,38 +88,48 @@ public class Marker extends LinearOpMode {
 
         waitForStart();
         runtime.reset();
-        leftDrive.setPower(0.5);
-        rightDrive.setPower(0.5);
-        sleep(7000);
-        leftDrive.setPower(0.0);
-        rightDrive.setPower(0.0);
-        Claw.setPower(-0.5);
-        sleep(3000);
+        //Dropdown with claw
+        Claw.setPower(1);
+        sleep(1920);
+        Claw.setPower(0);
+        sleep(250);
         Claw.setPower(0.5);
         sleep(250);
-        HDrive.setPower(0.5);
-        sleep(2000);
-        leftDrive.setPower(power);
-        rightDrive.setPower(power);
-        sleep(2000);
+
+        //Strafing Out
         HDrive.setPower(-0.5);
-        sleep(2000);
-        leftDrive.setPower(power);
-        rightDrive.setPower(power);
-        sleep(7000);
-        leftDrive.setPower(0.0);
-        rightDrive.setPower(0.0);
+        sleep(500);
+        leftDrive.setPower(-0.5);
+        rightDrive.setPower(-0.5);
+        sleep(500);
+
+        //Turning
+        leftDrive.setPower(-0.5);
+        rightDrive.setPower(0.5);
         sleep(1000);
+        leftDrive.setPower(-1);
+        rightDrive.setPower(1);
+        sleep(750);
+        leftDrive.setPower(0.5);
+        rightDrive.setPower(-0.5);
+        sleep(2000);
+        leftDrive.setPower(-1);
+        rightDrive.setPower(1);
+        sleep(750);
+        leftDrive.setPower(-0.5);
+        rightDrive.setPower(0.5);
+        sleep(3000);
 
 
         Marker.setPower(-0.5);
-        Thread.sleep(4000);
-
-        Marker.setPower(0.0);
-        Thread.sleep(5000);
-
+        Thread.sleep(6000);
+        Marker.setPower(0);
+        Thread.sleep(1500);
         Marker.setPower(0.5);
-        Thread.sleep(4000);
+        Thread.sleep(6000);
+        Claw.setPower(-1);
+        sleep(2000);
+
 
     }
 }
