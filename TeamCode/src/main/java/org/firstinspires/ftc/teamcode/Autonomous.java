@@ -62,7 +62,7 @@ public class Autonomous extends LinearOpMode {
     @Override
     public void runOpMode() {
         robot.init(hardwareMap);
-        gyro = hardwareMap.get(BNO055IMU.class, "Gyro");
+        gyro = hardwareMap.get(BNO055IMU.class, "imu");
 
         telemetry.addData(">", "Calibrating gyro and resetting encoder");
         //test
@@ -74,6 +74,7 @@ public class Autonomous extends LinearOpMode {
         gyro.initialize(parameters);
         robot.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.mechMotor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             idle();
 
 
@@ -82,8 +83,11 @@ public class Autonomous extends LinearOpMode {
 
         robot.leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.mechMotor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         waitForStart();
         runtime.reset();
+        robot.mechMotor1.setTargetPosition(-5000);
+
         while (!isStarted()) {
             telemetry.addData(">", "Robot Heading = %d");
             telemetry.update();
@@ -94,6 +98,8 @@ public class Autonomous extends LinearOpMode {
         gyroDrive(DRIVE_SPEED,50,0.0);
         gyroTurn(TURN_SPEED,45);
         gyroDrive(DRIVE_SPEED,50,0.0);
+        gyroTurn( TURN_SPEED, 90.0);
+        gyroDrive(DRIVE_SPEED,-50,0.0);
         telemetry.addData("Path", "Complete");
         telemetry.update();
     }
