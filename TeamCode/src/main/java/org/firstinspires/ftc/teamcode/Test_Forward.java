@@ -27,22 +27,16 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+package org.firstinspires.ftc.teamcode;
 
-
-        package org.firstinspires.ftc.teamcode;
-
-import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
 
 //Move right, Move left, move forward, drop marker
+
 /**
  * This file contains an minimal example of a Linear "OpMode". An OpMode is a 'program' that runs in either
  * the autonomous or the teleop period of an FTC match. The names of OpModes appear on the menu
@@ -56,9 +50,9 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Marker", group="Autonomous")
-//@Disabledhttps://documentaryheaven.com/money-lobby/
-public class Marker extends LinearOpMode {
+@Autonomous(name="Test_Straff", group="Autonomous")
+//@Disabled
+public class Test_Forward extends LinearOpMode {
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor leftDrive = null;
@@ -89,49 +83,9 @@ public class Marker extends LinearOpMode {
 
         waitForStart();
         runtime.reset();
-        //Dropdown with claw
-        Claw.setPower(1);
-        sleep(1920);
-        Claw.setPower(0);
-        sleep(250);
-        Claw.setPower(1);
-        sleep(250);
-
-        //Strafing Out
-        HDrive.setPower(-0.25);
-        sleep(1000);
-        HDrive.setPower(0);
-        leftDrive.setPower(0);
-        rightDrive.setPower(0);
-        sleep(250);
         leftDrive.setPower(-0.5);
         rightDrive.setPower(-0.5);
-        sleep(750);
-
-       //Turning
-        leftDrive.setPower(0.5);
-        rightDrive.setPower(-0.5);
-        sleep(500);
-        leftDrive.setPower(-1);
-        rightDrive.setPower(-1);
-        sleep(750);
-        leftDrive.setPower(-0.5);
-        rightDrive.setPower(0.5);
-        sleep(750);
-        leftDrive.setPower(-1);
-        rightDrive.setPower(-1);
-        sleep(2000);
-
-
-        Marker.setPower(-0.5);
-        Thread.sleep(5000);
-        Marker.setPower(0);
-        Thread.sleep(1500);
-        Marker.setPower(0.5);
-        Thread.sleep(5000);
-        Claw.setPower(-1);
-        sleep(2000);
-
+        sleep(3000);
 
     }
 }

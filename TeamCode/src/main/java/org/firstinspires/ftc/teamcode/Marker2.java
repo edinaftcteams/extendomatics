@@ -62,6 +62,7 @@ public class Marker2 extends LinearOpMode {
         sleep(250);
 
 
+
         //Strafing Out
         HDrive.setPower(0.25);
         sleep(1000);
@@ -77,14 +78,24 @@ public class Marker2 extends LinearOpMode {
         leftDrive.setPower(-0.5);
         rightDrive.setPower(0.5);
         sleep(500);
+        HDrive.setPower(0);
+        leftDrive.setPower(0);
+        rightDrive.setPower(0);
+        sleep(250);
         leftDrive.setPower(-1);
         rightDrive.setPower(-1);
         sleep(750);
+        HDrive.setPower(0);
+        leftDrive.setPower(0);
+        rightDrive.setPower(0);
         leftDrive.setPower(-0.5);
         rightDrive.setPower(0.5);
         sleep(750);
-        leftDrive.setPower(-0.5);
-        rightDrive.setPower(-0.5);
+        HDrive.setPower(0);
+        leftDrive.setPower(0);
+        rightDrive.setPower(0);
+        leftDrive.setPower(-1);
+        rightDrive.setPower(-1);
         sleep(2000);
 
 
