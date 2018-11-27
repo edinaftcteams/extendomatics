@@ -89,8 +89,8 @@ public class ColinOpMode extends LinearOpMode {
 
             // Run wheels in POV mode (note: The joystick goes negative when pushed forwards, so negate it)
             // In this mode the Left stick moves the robot fwd and back, the Right stick turns left and right.
-            left  = gamepad1.left_stick_y;
-            right = gamepad1.right_stick_y;
+            left  = gamepad1.left_stick_y * 0.5;
+            right = gamepad1.right_stick_y * 0.5;
             mech1 = gamepad2.left_stick_y * 0.5;
             left2 = gamepad2.right_stick_y;
             central = gamepad1.right_stick_x;
@@ -116,10 +116,10 @@ public class ColinOpMode extends LinearOpMode {
 */
 
 
-            robot.leftMotor.setPower(left);
-            robot.rightMotor.setPower(right);
-            robot.mechMotor1.setPower(mech1);
-            robot.centralMotor.setPower(central);
+            robot.leftMotor.setPower(left * 0.5);
+            robot.rightMotor.setPower(right * 0.5);
+            robot.mechMotor1.setPower(mech1 * 0.5);
+            robot.centralMotor.setPower(central * 0.5);
             robot.leftClaw.setPower(left2);
             //robot.leftClaw.setPower(Range.clip(-gamepad2.right_stick_y, 1, -1));
             /*if (gamepad2.y) {

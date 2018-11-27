@@ -92,6 +92,8 @@ public class Marker extends LinearOpMode {
         sleep(1920);
         Claw.setPower(0);
         sleep(250);
+        Claw.setPower(1);
+        sleep(250);
 
         //Strafing Out
         HDrive.setPower(-0.25);

@@ -50,9 +50,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Markerdown", group="Autonomous")
+@Autonomous(name="Test_Straff", group="Autonomous")
 //@Disabled
-public class Markerdown extends LinearOpMode {
+public class Test_Straff extends LinearOpMode {
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor leftDrive = null;
@@ -83,8 +83,11 @@ public class Markerdown extends LinearOpMode {
 
         waitForStart();
         runtime.reset();
-        Claw.setPower(-1);
-        sleep(2150);
+        HDrive.setPower(0.5);
+        sleep(2000);
+        HDrive.setPower(-0.5);
+        sleep(2000);
+
 
     }
 }
