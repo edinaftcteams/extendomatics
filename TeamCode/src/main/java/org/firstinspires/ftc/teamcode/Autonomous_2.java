@@ -39,9 +39,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 @com.qualcomm.robotcore.eventloop.opmode.
 
-        Autonomous(name="Autonomous", group="RobotHardwareClassThingmabobba")
+        Autonomous(name="Autonomous_2", group="RobotHardwareClassThingmabobba")
 //@Disabled
-public class Autonomous extends LinearOpMode {
+public class Autonomous_2 extends LinearOpMode {
 
     RobotHardwareClassThingmabobba robot   = new RobotHardwareClassThingmabobba();
     private ElapsedTime runtime = new ElapsedTime();
@@ -80,7 +80,7 @@ public class Autonomous extends LinearOpMode {
         Center = hardwareMap.dcMotor.get("central_drive");
         Lifter = hardwareMap.dcMotor.get("mech_drive1");
 
-            idle();
+        idle();
 
 
         telemetry.addData(">", "Robot Ready.");
@@ -107,9 +107,14 @@ public class Autonomous extends LinearOpMode {
         sleep(500);
         Lifter.setPower(-1);
         sleep(1920);
-        gyroDrive(DRIVE_SPEED,-85.9,0);
-        gyroTurn(TURN_SPEED,-45);
-        gyroDrive(DRIVE_SPEED,120.75,0);
+        gyroDrive(DRIVE_SPEED,-11.64,0);
+        gyroTurn(TURN_SPEED,-90);
+        gyroDrive(DRIVE_SPEED,48.8,0);
+        gyroTurn(TURN_SPEED,-135);
+        gyroDrive(DRIVE_SPEED,69,0);
+        gyroHold(0,0,1000);
+        gyroTurn(TURN_SPEED,180);
+        gyroDrive(DRIVE_SPEED,144.9,0);
 
 
 
