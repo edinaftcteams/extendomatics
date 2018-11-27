@@ -50,7 +50,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Test_Straff", group="Autonomous")
+@Autonomous(name="Test_Forward", group="Autonomous")
 //@Disabled
 public class Test_Forward extends LinearOpMode {
     // Declare OpMode members.
