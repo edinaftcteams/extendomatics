@@ -83,7 +83,7 @@ public class Test_Forward extends LinearOpMode {
 
         waitForStart();
         runtime.reset();
-        leftDrive.setPower(-0.5);
+        leftDrive.setPower(-0.3);
         rightDrive.setPower(-0.5);
         sleep(3000);
 
