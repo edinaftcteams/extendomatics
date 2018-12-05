@@ -100,16 +100,15 @@ public class Autonomous extends LinearOpMode {
         Lifter.setPower(1);
         sleep(1920);
         Lifter.setPower(0);
-        sleep(500);
-        Center.setPower(0.25);
-        sleep(1000);
+        sleep(560);
+        Center.setPower(0.45);
+        sleep(560);
         Center.setPower(0);
         sleep(500);
         Lifter.setPower(-1);
         sleep(1920);
-        gyroDrive(DRIVE_SPEED,-85.9,0);
-        gyroTurn(TURN_SPEED,-45);
-        gyroDrive(DRIVE_SPEED,120.75,0);
+        gyroDrive(DRIVE_SPEED,100,75);
+
 
 
 

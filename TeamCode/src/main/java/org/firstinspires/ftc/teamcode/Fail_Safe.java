@@ -84,10 +84,15 @@ public class Fail_Safe extends LinearOpMode {
         waitForStart();
         runtime.reset();
         Claw.setPower(1);
-        sleep(1920);
+        sleep(1800);
         Claw.setPower(0);
         sleep(250);
-        HDrive.setPower(-0.5);
-        sleep(500);
+        HDrive.setPower(0.5);
+        sleep(150);
+        HDrive.setPower(0);
+        HDrive.setPower(0);
+        sleep(250);
+        Claw.setPower(-1);
+        sleep(1800);
     }
 }
