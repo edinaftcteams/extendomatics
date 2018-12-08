@@ -20,6 +20,7 @@ public class RobotHardwareClassThingmabobba
     public DcMotor mechMotor1;
     public DcMotor centralMotor;
     public CRServo leftClaw;
+
     /*public Servo rightClaw   = null;
     public Servo leftClaw2 = null;
     public Servo pushServo = null;
@@ -47,25 +48,27 @@ public class RobotHardwareClassThingmabobba
         leftMotor   = hwMap.dcMotor.get("left_drive");
         rightMotor  = hwMap.dcMotor.get("right_drive");
         mechMotor1   = hwMap.dcMotor.get("mech_drive1");
-        centralMotor  = hwMap.dcMotor.get("central_drive");
+
+
 
         leftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         mechMotor1.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-        centralMotor.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
+
 
         // Set all motors to zero power
         leftMotor.setPower(0);
         rightMotor.setPower(0);
         mechMotor1.setPower(0);
-        centralMotor.setPower(0);
+
 
         // Set all motors to run without encoders.
         //        // May want to use RUN_USING_ENCODERS if encoders are installed.
         leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         mechMotor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        centralMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
         leftClaw = hwMap.crservo.get("left_hand");
         /*rightClaw = hwMap.servo.get("right_hand");
         leftClaw2 = hwMap.servo.get("left_hand2")
@@ -113,7 +116,7 @@ public class RobotHardwareClassThingmabobba
 
         leftMotor.setPower(leftVal);
         rightMotor.setPower(rightVal);
-        centralMotor.setPower(centerVal);
+
 
 
     }

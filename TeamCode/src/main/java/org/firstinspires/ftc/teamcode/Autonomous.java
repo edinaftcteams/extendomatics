@@ -58,8 +58,8 @@ public class Autonomous extends LinearOpMode {
     static final double     HEADING_THRESHOLD       = 1 ;      // As tight as we can make it with an integer gyro
     static final double     P_TURN_COEFF            = 0.1;     // Larger is more responsive, but also less stable
     static final double     P_DRIVE_COEFF           = 0.15;     // Larger is more responsstaive, but also less stable
-    private DcMotor Center = null;
-    private DcMotor Lifter = null;
+
+    private DcMotor Lifter=null;
     private CRServo MarkerArm = null;
 
     @Override
@@ -77,8 +77,8 @@ public class Autonomous extends LinearOpMode {
         gyro.initialize(parameters);
         robot.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        Center = hardwareMap.dcMotor.get("central_drive");
-        Lifter = hardwareMap.dcMotor.get("mech_drive1");
+
+        Lifter=hardwareMap.dcMotor.get("mech_drive1");
 
             idle();
 
@@ -98,12 +98,12 @@ public class Autonomous extends LinearOpMode {
             telemetry.update();
         }
         Lifter.setPower(1);
-        sleep(1920);
+        sleep(2300);
         Lifter.setPower(0);
         sleep(560);
-        Center.setPower(0.45);
+
         sleep(560);
-        Center.setPower(0);
+
         sleep(500);
         Lifter.setPower(-1);
         sleep(1920);
